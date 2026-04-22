@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/xenium.schema.json",
+  "title": "Xenium In Situ Genomics Metadata",
+  "description": "FAIR-compliant metadata for Xenium in situ genomics data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/xenium.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"},
+        "ncbitaxon": {"type": "string"},
+        "cl": {"type": "string"}
+      }
+    },
+    "run_name": {
+      "type": "string",
+      "description": "Name of the Xenium run"
+    },
+    "sample_id": {
+      "type": "string",
+      "description": "Sample identifier"
+    },
+    "panel_name": {
+      "type": "string",
+      "description": "Name of the gene panel"
+    },
+    "panel_code": {
+      "type": "string",
+      "description": "Panel code identifier"
+    },
+    "cells_detected": {
+      "type": "integer",
+      "description": "Number of cells detected"
+    },
+    "transcripts_detected": {
+      "type": "integer",
+      "description": "Number of transcripts detected"
+    },
+    "gene_count": {
+      "type": "integer",
+      "description": "Number of genes in panel"
+    },
+    "mean_transcripts_per_cell": {
+      "type": "number",
+      "description": "Mean transcripts per cell"
+    },
+    "median_transcripts_per_cell": {
+      "type": "number",
+      "description": "Median transcripts per cell"
+    },
+    "focus_score": {
+      "type": "number",
+      "description": "Focus score metric"
+    },
+    "density_score": {
+      "type": "number",
+      "description": "Density score metric"
+    },
+    "cell_boundary_quality": {
+      "type": "string",
+      "description": "Cell boundary segmentation quality"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Image width in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Image height in pixels"
+    },
+    "magnification": {
+      "type": "string",
+      "description": "Microscope magnification"
+    },
+    "processing_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of Xenium analysis"
+    },
+    "software_version": {
+      "type": "string",
+      "description": "Xenium Analyzer version"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/ome_tiff.schema.json",
+  "title": "OME-TIFF Image Metadata",
+  "description": "FAIR-compliant metadata for OME-TIFF files following the OME Data Model.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/ome_tiff.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data"
+    },
+    "Image": {
+      "type": "object",
+      "description": "OME Image element",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "description": "Unique identifier for the image"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Name of the image"
+        },
+        "AcquisitionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Acquisition timestamp"
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description of the image"
+        },
+        "Pixels": {
+          "type": "object",
+          "description": "Pixel data specifications",
+          "properties": {
+            "ID": {
+              "type": "string"
+            },
+            "DimensionOrder": {
+              "type": "string",
+              "enum": ["XYCTZ", "XYZTC", "XYCZT", "XYTZC", "XYTCZ", "XYZT C"],
+              "description": "Order of dimensions"
+            },
+            "Type": {
+              "type": "string",
+              "description": "Data type (e.g., 'uint8', 'uint16', 'float32')"
+            },
+            "SizeX": {
+              "type": "integer",
+              "description": "Number of pixels in X"
+            },
+            "SizeY": {
+              "type": "integer",
+              "description": "Number of pixels in Y"
+            },
+            "SizeZ": {
+              "type": "integer",
+              "description": "Number of focal planes"
+            },
+            "SizeT": {
+              "type": "integer",
+              "description": "Number of time points"
+            },
+            "SizeC": {
+              "type": "integer",
+              "description": "Number of channels"
+            },
+            "PhysicalSizeX": {
+              "type": "number",
+              "description": "Physical size in X"
+            },
+            "PhysicalSizeY": {
+              "type": "number",
+              "description": "Physical size in Y"
+            },
+            "PhysicalSizeZ": {
+              "type": "number",
+              "description": "Physical size in Z"
+            },
+            "PhysicalSizeXUnit": {
+              "type": "string",
+              "description": "Unit for PhysicalSizeX (e.g., 'µm')"
+            },
+            "PhysicalSizeYUnit": {
+              "type": "string",
+              "description": "Unit for PhysicalSizeY"
+            },
+            "PhysicalSizeZUnit": {
+              "type": "string",
+              "description": "Unit for PhysicalSizeZ"
+            },
+            "BigEndian": {
+              "type": "boolean",
+              "description": "Byte order"
+            },
+            "Channels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ID": {"type": "string"},
+                  "Name": {"type": "string"},
+                  "Color": {
+                    "type": "string",
+                    "description": "Color as RGB hex (e.g., 'FF0000')"
+                  },
+                  "Fluor": {
+                    "type": "string",
+                    "description": "Fluorochrome name"
+                  },
+                  "EmissionWavelength": {
+                    "type": "number",
+                    "description": "Emission wavelength in nm"
+                  },
+                  "ExcitationWavelength": {
+                    "type": "number",
+                    "description": "Excitation wavelength in nm"
+                  },
+                  "NDFilter": {
+                    "type": "number",
+                    "description": "Neutral density filter value"
+                  },
+                  "PockelCellSetting": {
+                    "type": "integer",
+                    "description": "Pockel cell setting"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "InstrumentRef": {
+          "type": "object",
+          "properties": {
+            "ID": {
+              "type": "string",
+              "description": "Reference to instrument"
+            }
+          }
+        }
+      }
+    },
+    "Instrument": {
+      "type": "object",
+      "description": "Instrument used for acquisition",
+      "properties": {
+        "ID": {"type": "string"},
+        "Microscope": {
+          "type": "object",
+          "properties": {
+            "ID": {"type": "string"},
+            "Manufacturer": {"type": "string"},
+            "Model": {"type": "string"},
+            "Type": {"type": "string"},
+            "SerialNumber": {"type": "string"}
+          }
+        },
+        "Objectives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ID": {"type": "string"},
+              "Manufacturer": {"type": "string"},
+              "Model": {"type": "string"},
+              "LensNA": {"type": "number"},
+              "WorkingDistance": {"type": "number"},
+              "NominalMagnification": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version", "Image"]
+}

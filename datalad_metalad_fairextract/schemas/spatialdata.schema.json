@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/spatialdata.schema.json",
+  "title": "SpatialData Object Metadata",
+  "description": "FAIR-compliant metadata for SpatialData .zarr stores following OME-NGFF specification.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/spatialdata.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability"
+    },
+    "spatialdata_version": {
+      "type": "string",
+      "description": "Version of the SpatialData library used"
+    },
+    "element_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Images", "Labels", "Points", "Shapes", "Tables"]
+      },
+      "description": "Types of elements present in the SpatialData object"
+    },
+    "element_counts": {
+      "type": "object",
+      "properties": {
+        "Images": {
+          "type": "integer",
+          "description": "Number of image elements"
+        },
+        "Labels": {
+          "type": "integer",
+          "description": "Number of label/segmentation elements"
+        },
+        "Points": {
+          "type": "integer",
+          "description": "Number of points elements"
+        },
+        "Shapes": {
+          "type": "integer",
+          "description": "Number of shapes elements"
+        },
+        "Tables": {
+          "type": "integer",
+          "description": "Number of table elements"
+        }
+      }
+    },
+    "coordinate_systems": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of coordinate systems defined"
+    },
+    "images": {
+      "type": "array",
+      "description": "Image element details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string", "enum": ["image", "multiscale_image"]},
+          "dims": {"type": "string"},
+          "shape": {
+            "type": "array",
+            "items": {"type": "integer"}
+          },
+          "dtype": {"type": "string"},
+          "coordinate_system": {"type": "string"}
+        }
+      }
+    },
+    "labels": {
+      "type": "array",
+      "description": "Label element details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "shape": {
+            "type": "array",
+            "items": {"type": "integer"}
+          },
+          "coordinate_system": {"type": "string"}
+        }
+      }
+    },
+    "points": {
+      "type": "array",
+      "description": "Points element details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "n_obs": {"type": "integer"},
+          "attributes": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "coordinate_system": {"type": "string"}
+        }
+      }
+    },
+    "shapes": {
+      "type": "array",
+      "description": "Shapes element details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "shape_type": {
+            "type": "string",
+            "enum": ["polygon", "polyline", "circle", "ellipse", "rectangle", "point"]
+          },
+          "n_obs": {"type": "integer"},
+          "coordinate_system": {"type": "string"}
+        }
+      }
+    },
+    "tables": {
+      "type": "array",
+      "description": "Table element details",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "n_obs": {"type": "integer"},
+          "n_vars": {"type": "integer"},
+          "obs_columns": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "var_columns": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "uns_keys": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "transformations": {
+      "type": "object",
+      "description": "Coordinate transformations between systems"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version", "element_types"]
+}

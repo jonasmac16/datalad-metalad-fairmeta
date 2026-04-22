@@ -1,0 +1,100 @@
+site_name: datalad-metalad-fairmeta
+site_description: FAIR-compliant metadata extractors for spatial biology data using DataLad Metalad
+site_author: Jonas Michels
+site_url: https://jonasmac16.github.io/datalad-metalad-fairmeta
+
+repo_name: jonasmac16/datalad-metalad-fairmeta
+repo_url: https://github.com/jonasmac16/datalad-metalad-fairmeta
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - navigation.top
+    - toc.integrate
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+            show_root_heading: true
+            docstring_style: google
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quick Start: quickstart.md
+  - Testing: testing.md
+  - Extractors:
+      - extractors/index.md
+      - extractors/ome_tiff.md
+      - extractors/tiff.md
+      - extractors/h5ad.md
+      - extractors/fastq.md
+      - extractors/spatialdata.md
+      - extractors/cosmx.md
+      - extractors/xenium.md
+      - extractors/visium_hd.md
+      - extractors/merscope.md
+      - extractors/macsima.md
+      - extractors/phenocycler.md
+      - extractors/molecular_cartography.md
+      - extractors/hyperion.md
+      - extractors/manual.md
+  - Metalad Integration:
+      - metalad/index.md
+  - Schemas:
+      - schemas/index.md
+      - schemas/ontologies.md
+  - Edge Cases:
+      - edge_cases/index.md
+      - edge_cases/missing_files.md
+      - edge_cases/annex_files.md
+      - edge_cases/validation_errors.md
+      - edge_cases/interactive_mode.md
+      - edge_cases/large_datasets.md
+  - Examples:
+      - examples/index.md
+      - examples/basic_usage.md
+      - examples/spatial_omics.md
+      - examples/batch_processing.md
+  - API Reference: api/extractors.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/jonasmac16/datalad-metalad-fairmeta

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/tiff.schema.json",
+  "title": "TIFF Image Metadata",
+  "description": "FAIR-compliant metadata for general TIFF image files.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/tiff.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability"
+    },
+    "image_name": {
+      "type": "string",
+      "description": "Name of the image"
+    },
+    "image_description": {
+      "type": "string",
+      "description": "Description from TIFF ImageDescription tag"
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Image width in pixels"
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Image height in pixels"
+    },
+    "bits_per_sample": {
+      "type": "integer",
+      "description": "Bits per sample (e.g., 8, 16, 32)"
+    },
+    "samples_per_pixel": {
+      "type": "integer",
+      "description": "Number of samples per pixel"
+    },
+    "compression": {
+      "type": "string",
+      "description": "Compression scheme (e.g., 'LZW', 'JPEG', 'Uncompressed')"
+    },
+    "photometric_interpretation": {
+      "type": "string",
+      "description": "Photometric interpretation (e.g., 'RGB', 'Grayscale', 'Palette')"
+    },
+    "planar_configuration": {
+      "type": "string",
+      "description": "Planar configuration ('Chunky' or 'Planar')"
+    },
+    "x_resolution": {
+      "type": "number",
+      "description": "X resolution value"
+    },
+    "y_resolution": {
+      "type": "number",
+      "description": "Y resolution value"
+    },
+    "resolution_unit": {
+      "type": "string",
+      "description": "Resolution unit ('Inch', 'Centimeter', 'None')"
+    },
+    "software": {
+      "type": "string",
+      "description": "Software that created the image"
+    },
+    "datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "DateTime tag value"
+    },
+    "artist": {
+      "type": "string",
+      "description": "Artist/creator of the image"
+    },
+    "copyright": {
+      "type": "string",
+      "description": "Copyright notice"
+    },
+    "tile_width": {
+      "type": "integer",
+      "description": "Tile width if tiled TIFF"
+    },
+    "tile_height": {
+      "type": "integer",
+      "description": "Tile height if tiled TIFF"
+    },
+    "sample_format": {
+      "type": "string",
+      "description": "Sample format (e.g., 'Unsigned', 'Signed', 'Float')"
+    },
+    "extra_samples": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Extra sample information"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

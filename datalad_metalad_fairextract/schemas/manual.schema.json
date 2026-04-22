@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/manual.schema.json",
+  "title": "Manual Metadata Entry Schema",
+  "description": "Schema for manually entered metadata via interactive prompts or config files.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/manual.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Title of the dataset"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the data"
+    },
+    "creators": {
+      "type": "array",
+      "items": {"$ref": "base.schema.json#/$defs/Person"},
+      "description": "People who created this dataset"
+    },
+    "organism_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Organism (NCBITaxon)"
+    },
+    "tissue_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Tissue or organ (UBERON)"
+    },
+    "cell_type_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Cell type (CL)"
+    },
+    "assay_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Assay/technology (EFO)"
+    },
+    "disease_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Disease state (MONDO/PATO)"
+    },
+    "development_stage_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Development stage"
+    },
+    "sex_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Sex (PATO)"
+    },
+    "self_reported_ethnicity_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Self-reported ethnicity (HANCESTRO)"
+    },
+    "donor_id": {
+      "type": "string",
+      "description": "Donor/subject identifier"
+    },
+    "sample_id": {
+      "type": "string",
+      "description": "Sample identifier"
+    },
+    "license": {
+      "type": "string",
+      "default": "CC BY 4.0",
+      "description": "License for data reuse"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Keywords for discoverability"
+    },
+    "related_identifiers": {
+      "type": "array",
+      "items": {"$ref": "base.schema.json#/$defs/RelatedIdentifier"},
+      "description": "References to related resources"
+    },
+    "custom_fields": {
+      "type": "object",
+      "description": "User-defined metadata fields"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version", "title"]
+}

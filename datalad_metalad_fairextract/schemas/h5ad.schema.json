@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/h5ad.schema.json",
+  "title": "AnnData h5ad Metadata",
+  "description": "FAIR-compliant metadata for AnnData h5ad files following scFAIR v7.1 and CELLxGENE schema.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/h5ad.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data",
+      "properties": {
+        "scao": {"type": "string"},
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"},
+        "cl": {"type": "string"},
+        "ncbitaxon": {"type": "string"},
+        "mondo": {"type": "string"},
+        "pato": {"type": "string"}
+      }
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the dataset"
+    },
+    "organism_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Organism (NCBITaxon ontology, e.g., NCBITaxon:9606 for Homo sapiens)"
+    },
+    "tissue_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Tissue or organ (UBERON ontology)"
+    },
+    "cell_type_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Cell type (Cell Ontology - CL)"
+    },
+    "assay_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Assay/technology (EFO ontology, e.g., EFO:0009899 for 10x 3' v3)"
+    },
+    "disease_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Disease state (MONDO or PATO:0000461 for normal)"
+    },
+    "development_stage_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Development stage (HsapDv, MmusDv, etc.)"
+    },
+    "sex_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Sex (PATO ontology)"
+    },
+    "self_reported_ethnicity_ontology_term_id": {
+      "$ref": "base.schema.json#/$defs/OntologyTerm",
+      "description": "Self-reported ethnicity (HANCESTRO ontology)"
+    },
+    "cell_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of cells in the dataset"
+    },
+    "gene_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of genes/variables"
+    },
+    "is_primary_data": {
+      "type": "boolean",
+      "description": "Whether this is primary data"
+    },
+    "suspension_type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["cell", "nucleus", "na"]
+      },
+      "description": "Type of cellular material"
+    },
+    "tissue_type": {
+      "type": "string",
+      "enum": ["tissue", "organoid", "cell_line", "primary_cell_culture"],
+      "description": "Type of biological sample"
+    },
+    "obsm_keys": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Keys in obsm (embeddings)"
+    },
+    "layers": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Available layers"
+    },
+    "uns": {
+      "type": "object",
+      "description": "Unstructured metadata from AnnData.uns"
+    },
+    "default_embedding": {
+      "type": "string",
+      "description": "Default embedding to use for visualization"
+    },
+    "batch": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Batch identifiers if present"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version", "organism_ontology_term_id", "assay_ontology_term_id"]
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/fastq.schema.json",
+  "title": "FASTQ Sequencing File Metadata",
+  "description": "FAIR-compliant metadata for FASTQ sequencing files following SRA/ENA standards.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/fastq.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context",
+      "properties": {
+        "sra": {"type": "string"},
+        "ena": {"type": "string"}
+      }
+    },
+    "filename": {
+      "type": "string",
+      "description": "Original filename"
+    },
+    "file_size": {
+      "type": "integer",
+      "description": "File size in bytes"
+    },
+    "md5_checksum": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$",
+      "description": "MD5 checksum of the file"
+    },
+    "instrument": {
+      "type": "string",
+      "description": "Sequencing instrument (e.g., Illumina HiSeq)"
+    },
+    "instrument_model": {
+      "type": "string",
+      "description": "Specific instrument model"
+    },
+    "flowcell": {
+      "type": "string",
+      "description": "Flowcell identifier"
+    },
+    "flowcell_type": {
+      "type": "string",
+      "description": "Type of flowcell (e.g., HiSeq 4000, NovaSeq S4)"
+    },
+    "lane": {
+      "type": "integer",
+      "description": "Flowcell lane number"
+    },
+    "read_number": {
+      "type": "integer",
+      "description": "Read number (1 or 2 for paired-end)"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Run identifier (SRR/ERR)"
+    },
+    "sample_id": {
+      "type": "string",
+      "description": "Sample identifier"
+    },
+    "study_id": {
+      "type": "string",
+      "description": "Study/project identifier"
+    },
+    "library_name": {
+      "type": "string",
+      "description": "Library name"
+    },
+    "library_strategy": {
+      "type": "string",
+      "description": "Library strategy (e.g., RNA-Seq, WGS)"
+    },
+    "library_source": {
+      "type": "string",
+      "description": "Library source (e.g., TRANSCRIPTOMIC, GENOMIC)"
+    },
+    "library_selection": {
+      "type": "string",
+      "description": "Library selection method (e.g., polyA, random)"
+    },
+    "library_layout": {
+      "type": "string",
+      "enum": ["SINGLE", "PAIRED"],
+      "description": "Library layout"
+    },
+    "bases": {
+      "type": "integer",
+      "description": "Total bases in file"
+    },
+    "quality_score": {
+      "type": "string",
+      "enum": ["Phred33", "Phred64", "Solexa"],
+      "description": "Quality score encoding"
+    },
+    "center_name": {
+      "type": "string",
+      "description": "Sequencing center name"
+    },
+    "sequencing_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of sequencing"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version", "filename"]
+}

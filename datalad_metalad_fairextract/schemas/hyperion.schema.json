@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/hyperion.schema.json",
+  "title": "Hyperion Metadata Schema",
+  "description": "FAIR-compliant metadata for Fluidigm Hyperion imaging data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/hyperion.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"}
+      }
+    },
+    "image_count": {
+      "type": "integer",
+      "description": "Number of TIF image files found"
+    },
+    "channel_naming_pattern": {
+      "type": "string",
+      "description": "Pattern used for channel naming (e.g., {prefix}_{channel}_001.tiff)"
+    },
+    "channels": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of channel names extracted from filenames"
+    },
+    "channel_count": {
+      "type": "integer",
+      "description": "Number of unique channels"
+    },
+    "sample_file": {
+      "type": "string",
+      "description": "Name of a sample image file"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Width of the image in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Height of the image in pixels"
+    },
+    "image_channels": {
+      "type": "integer",
+      "description": "Number of channels per image file"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/phenocycler.schema.json",
+  "title": "PhenoCycler Metadata Schema",
+  "description": "FAIR-compliant metadata for Akoya PhenoCycler imaging data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/phenocycler.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"}
+      }
+    },
+    "image_file": {
+      "type": "string",
+      "description": "Name of the primary image file"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["qptiff", "tif"],
+      "description": "Format of the image file (QuPath TIFF or standard TIFF)"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Width of the image in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Height of the image in pixels"
+    },
+    "channels": {
+      "type": "integer",
+      "description": "Number of channels in the image"
+    },
+    "qptiff_metadata_available": {
+      "type": "boolean",
+      "description": "Whether QuPath TIFF metadata is available"
+    },
+    "imagej_metadata_available": {
+      "type": "boolean",
+      "description": "Whether ImageJ metadata is available"
+    },
+    "channel_names": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of channel names/identifiers"
+    },
+    "channel_count": {
+      "type": "integer",
+      "description": "Number of channels"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

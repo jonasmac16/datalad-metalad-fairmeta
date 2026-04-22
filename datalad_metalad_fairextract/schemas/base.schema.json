@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/base.schema.json",
+  "title": "FAIR Metadata Base Schema",
+  "description": "Common definitions for FAIR-compliant biological metadata following spatial biology standards.",
+  "type": "object",
+  "$defs": {
+    "OntologyTerm": {
+      "type": "object",
+      "description": "An ontology term using CURIE format (e.g., EFO:0009899).",
+      "required": ["id", "label"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z]+:\\d+$",
+          "description": "CURIE identifier from an ontology (e.g., EFO:0009899)"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable label for the term"
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "description": "A person associated with the metadata (creator, contributor, etc.)",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the person"
+        },
+        "affiliation": {
+          "type": "string",
+          "description": "Institutional affiliation"
+        },
+        "orcid": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$",
+          "description": "ORCID identifier"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role (e.g., 'creator', 'contributor', 'principal_investigator')"
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "description": "Information about the extraction process",
+      "properties": {
+        "extractor_id": {
+          "type": "string",
+          "description": "Unique identifier of the extractor"
+        },
+        "extractor_name": {
+          "type": "string",
+          "description": "Human-readable name of the extractor"
+        },
+        "extractor_version": {
+          "type": "string",
+          "description": "Version of the extractor"
+        },
+        "extraction_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of extraction"
+        },
+        "source_files": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of source files used for extraction"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters passed to the extractor"
+        }
+      }
+    },
+    "RelatedIdentifier": {
+      "type": "object",
+      "description": "Reference to a related resource",
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["doi", "bioproject", "geo", "arrayexpress", "ena", "sra", "pmcid", "url", "other"],
+          "description": "Type of identifier"
+        },
+        "value": {
+          "type": "string",
+          "description": "The identifier value"
+        },
+        "relation": {
+          "type": "string",
+          "enum": ["cites", "is_cited_by", "is_part_of", "has_part", "references", "is_referenced_by", "derived_from", "source"],
+          "default": "is_part_of",
+          "description": "Relationship to this resource"
+        }
+      }
+    },
+    "SpatialCoordinate": {
+      "type": "object",
+      "description": "Spatial coordinates in a coordinate system",
+      "required": ["x", "y"],
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "X coordinate"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate"
+        },
+        "z": {
+          "type": "number",
+          "description": "Z coordinate (for 3D data)"
+        },
+        "coordinate_system": {
+          "type": "string",
+          "description": "Name of the coordinate system"
+        }
+      }
+    },
+    "PhysicalUnit": {
+      "type": "object",
+      "description": "A value with a physical unit",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Numeric value"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of measurement (e.g., 'micrometer', 'pixel')"
+        }
+      }
+    },
+    "ExperimentMetadata": {
+      "type": "object",
+      "description": "Core experiment metadata fields",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the experiment or study"
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description"
+        },
+        "organism_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Organism studied (NCBITaxon ontology)"
+        },
+        "tissue_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Tissue or organ studied (UBERON ontology)"
+        },
+        "cell_type_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Cell type (Cell Ontology)"
+        },
+        "assay_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Assay/technology used (EFO ontology)"
+        },
+        "disease_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Disease state (MONDO or PATO ontology)"
+        },
+        "development_stage_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Development stage (HsapDv, MmusDv, etc.)"
+        },
+        "sex_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Sex (PATO ontology, e.g., PATO:0000383 female, PATO:0000384 male)"
+        },
+        "self_reported_ethnicity_ontology_term_id": {
+          "$ref": "#/$defs/OntologyTerm",
+          "description": "Self-reported ethnicity (HANCESTRO ontology)"
+        },
+        "donor_id": {
+          "type": "string",
+          "description": "Identifier for the donor/subject"
+        },
+        "sample_id": {
+          "type": "string",
+          "description": "Identifier for the biological sample"
+        }
+      }
+    }
+  }
+}

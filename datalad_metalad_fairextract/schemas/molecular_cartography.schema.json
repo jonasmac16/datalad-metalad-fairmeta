@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/molecular_cartography.schema.json",
+  "title": "Molecular Cartography Metadata Schema",
+  "description": "FAIR-compliant metadata for Resolve Bioscience Molecular Cartography data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/molecular_cartography.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"},
+        "ncbitaxon": {"type": "string"},
+        "cl": {"type": "string"}
+      }
+    },
+    "results_file": {
+      "type": "string",
+      "description": "Name of the transcript results file"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region identifier (e.g., A2-1)"
+    },
+    "transcript_count": {
+      "type": "integer",
+      "description": "Number of transcripts detected"
+    },
+    "columns": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Column names in the results file"
+    },
+    "image_files": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of channel image filenames"
+    },
+    "image_count": {
+      "type": "integer",
+      "description": "Number of image files"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Width of the image in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Height of the image in pixels"
+    },
+    "image_channels": {
+      "type": "integer",
+      "description": "Number of channels per image"
+    },
+    "channels": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of channel identifiers"
+    },
+    "channel_count": {
+      "type": "integer",
+      "description": "Number of unique channels"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

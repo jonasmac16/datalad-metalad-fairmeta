@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/visium_hd.schema.json",
+  "title": "Visium HD Metadata Schema",
+  "description": "FAIR-compliant metadata for 10x Genomics Visium HD data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/visium_hd.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"},
+        "ncbitaxon": {"type": "string"}
+      }
+    },
+    "microscope_image_found": {
+      "type": "boolean",
+      "description": "Whether a microscope image was found in the directory"
+    },
+    "microscope_image_directory": {
+      "type": "string",
+      "description": "Name of the directory containing microscope images"
+    },
+    "microscope_image_count": {
+      "type": "integer",
+      "description": "Number of microscope image files found"
+    },
+    "microscope_image_file": {
+      "type": "string",
+      "description": "Name of the primary microscope image file"
+    },
+    "microscope_image_files": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of microscope image filenames (up to 5)"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Width of the microscope image in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Height of the microscope image in pixels"
+    },
+    "image_channels": {
+      "type": "integer",
+      "description": "Number of color channels in the microscope image"
+    },
+    "h5_files": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of H5/HDF5 files in the directory"
+    },
+    "h5_file_count": {
+      "type": "integer",
+      "description": "Number of H5 files found"
+    },
+    "feature_matrix_file": {
+      "type": "string",
+      "description": "Name of the feature matrix H5 file"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

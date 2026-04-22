@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/macsima.schema.json",
+  "title": "MACSima Metadata Schema",
+  "description": "FAIR-compliant metadata for Bruker MACSima imaging data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/macsima.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"}
+      }
+    },
+    "image_count": {
+      "type": "integer",
+      "description": "Number of TIF image files found"
+    },
+    "sample_file": {
+      "type": "string",
+      "description": "Name of a sample image file"
+    },
+    "image_width": {
+      "type": "integer",
+      "description": "Width of the image in pixels"
+    },
+    "image_height": {
+      "type": "integer",
+      "description": "Height of the image in pixels"
+    },
+    "samples_per_pixel": {
+      "type": "integer",
+      "description": "Number of samples (channels) per pixel"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["ome-tiff", "non-standard"],
+      "description": "Format of the TIF files (OME-TIFF or non-standard)"
+    },
+    "ome_metadata_available": {
+      "type": "boolean",
+      "description": "Whether OME metadata is available in the files"
+    },
+    "non_standard_files": {
+      "type": "integer",
+      "description": "Number of non-standard format files"
+    },
+    "antibodies": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of antibody identifiers found in filenames"
+    },
+    "antibody_count": {
+      "type": "integer",
+      "description": "Number of unique antibodies"
+    },
+    "channels": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of channel identifiers"
+    },
+    "channel_count": {
+      "type": "integer",
+      "description": "Number of unique channels"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}

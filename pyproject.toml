@@ -1,0 +1,105 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datalad-metalad-fairmeta"
+version = "0.1.0"
+description = "FAIR metadata extractors for spatial biology data"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Jonas Michels", email = "jonas@example.com"}
+]
+keywords = ["datalad", "metalad", "metadata", "spatial-biology", "fair", "omics"]
+classifiers = [
+    "Programming Language :: Python",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "datalad>=0.18",
+    "datalad-metalad>=0.4",
+    "jsonschema>=4.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+ome_tiff = ["ome-types>=0.4.0"]
+h5ad = ["anndata>=0.7.0"]
+spatialdata = ["spatialdata>=0.4.0"]
+all = [
+    "ome-types>=0.4.0",
+    "anndata>=0.7.0",
+    "spatialdata>=0.4.0",
+    "tifffile>=2021.0",
+]
+docs = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.0",
+    "mkdocstrings[python]>=0.20",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+    "anndata>=0.7.0",
+    "scanpy>=1.9.0",
+    "pillow>=9.0.0",
+    "ome-types>=0.4.0",
+    "spatialdata>=0.4.0",
+    "pyarrow>=10.0.0",
+    "tifffile>=2021.0",
+    "numpy>=1.20.0",
+    "pandas>=1.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/jonasmac16/datalad-metalad-fairmeta"
+Documentation = "https://jonasmac16.github.io/datalad-metalad-fairmeta"
+Repository = "https://github.com/jonasmac16/datalad-metalad-fairmeta"
+Issues = "https://github.com/jonasmac16/datalad-metalad-fairmeta/issues"
+
+[project.entry-points."datalad.extensions"]
+"metalad-fairmeta" = "datalad_metalad_fairextract:command_suite"
+
+[project.entry-points."datalad.metadata.extractors"]
+fairmeta_ome_tiff = "datalad_metalad_fairextract.extractors.ome_tiff:OmeTiffFileExtractor"
+fairmeta_tiff = "datalad_metalad_fairextract.extractors.tiff:TiffFileExtractor"
+fairmeta_spatialdata = "datalad_metalad_fairextract.extractors.spatialdata:SpatialDataDatasetExtractor"
+fairmeta_h5ad = "datalad_metalad_fairextract.extractors.h5ad:H5adFileExtractor"
+fairmeta_cosmx = "datalad_metalad_fairextract.extractors.cosmx:CosMxDatasetExtractor"
+fairmeta_xenium = "datalad_metalad_fairextract.extractors.xenium:XeniumDatasetExtractor"
+fairmeta_visium_hd = "datalad_metalad_fairextract.extractors.visium_hd:VisiumHDDatasetExtractor"
+fairmeta_merscope = "datalad_metalad_fairextract.extractors.merscope:MerscopeDatasetExtractor"
+fairmeta_macsima = "datalad_metalad_fairextract.extractors.macsima:MacsimaDatasetExtractor"
+fairmeta_phenocycler = "datalad_metalad_fairextract.extractors.phenocycler:PhenoCyclerDatasetExtractor"
+fairmeta_molecular_cartography = "datalad_metalad_fairextract.extractors.molecular_cartography:MolecularCartographyDatasetExtractor"
+fairmeta_hyperion = "datalad_metalad_fairextract.extractors.hyperion:HyperionDatasetExtractor"
+fairmeta_fastq = "datalad_metalad_fairextract.extractors.fastq:FastqFileExtractor"
+fairmeta_manual = "datalad_metalad_fairextract.extractors.manual:FairmetaManualDatasetExtractor"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["datalad_metalad_fairextract*"]
+
+[tool.setuptools.package-data]
+datalad_metalad_fairextract = ["schemas/*.json"]
+
+[tool.pytest]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "synthetic: uses synthetic test data",
+    "public: uses public test data"
+]
+
+[tool.mkdocs]
+material_installed = true

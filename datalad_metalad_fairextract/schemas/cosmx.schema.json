@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datalad-metalad-fairmeta.github.io/schemas/cosmx.schema.json",
+  "title": "CosMx Spatial Molecular Imaging Metadata",
+  "description": "FAIR-compliant metadata for CosMx spatial molecular imaging data.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://datalad-metalad-fairmeta.github.io/schemas/cosmx.schema.json"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for linked data interoperability",
+      "properties": {
+        "efo": {"type": "string"},
+        "uberon": {"type": "string"},
+        "ncbitaxon": {"type": "string"},
+        "cl": {"type": "string"}
+      }
+    },
+    "run_name": {
+      "type": "string",
+      "description": "Name of the CosMx run"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for the run"
+    },
+    "tissue_name": {
+      "type": "string",
+      "description": "Name of the tissue section"
+    },
+    "slide_id": {
+      "type": "string",
+      "description": "Slide identifier"
+    },
+    "panel_name": {
+      "type": "string",
+      "description": "Name of the gene/antibody panel"
+    },
+    "panel_version": {
+      "type": "string",
+      "description": "Version of the panel"
+    },
+    "assay_type": {
+      "type": "string",
+      "description": "Type of CosMx assay (RNA or Protein)"
+    },
+    "fov_count": {
+      "type": "integer",
+      "description": "Number of fields of view"
+    },
+    "cell_count": {
+      "type": "integer",
+      "description": "Number of cells detected"
+    },
+    "gene_count": {
+      "type": "integer",
+      "description": "Number of genes profiled"
+    },
+    "slide_width": {
+      "type": "number",
+      "description": "Width of the slide area"
+    },
+    "slide_height": {
+      "type": "number",
+      "description": "Height of the slide area"
+    },
+    "pixel_size": {
+      "type": "number",
+      "description": "Pixel size in micrometers"
+    },
+    "processing_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of data processing"
+    },
+    "software_version": {
+      "type": "string",
+      "description": "Version of CosMx analysis software"
+    },
+    "provenance": {
+      "$ref": "base.schema.json#/$defs/Provenance"
+    }
+  },
+  "required": ["$schema", "schema_version"]
+}
