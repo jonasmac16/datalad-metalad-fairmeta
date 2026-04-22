@@ -17,13 +17,13 @@ pip install datalad-metalad-fairmeta
 ### From GitHub
 
 ```bash
-pip install git+https://github.com/your-org/datalad-metalad-fairmeta.git
+pip install git+https://github.com/jonasmac16/datalad-metalad-fairmeta.git
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/your-org/datalad-metalad-fairmeta
+git clone https://github.com/jonasmac16/datalad-metalad-fairmeta
 cd datalad-metalad-fairmeta
 pip install -e .
 ```
@@ -101,10 +101,10 @@ You can also use the containerized version:
 
 ```bash
 # Pull from Docker Hub
-docker pull your-org/datalad-metalad-fairmeta:latest
+docker pull jonasmac16/datalad-metalad-fairmeta:latest
 
 # Run with DataLad
-docker run --rm -v /path/to/data:/data your-org/datalad-metalad-fairmeta \
+docker run --rm -v /path/to/data:/data jonasmac16/datalad-metalad-fairmeta \
   datalad meta-extract -d /data fairmeta_ome_tiff /data/image.ome.tiff
 ```
 

@@ -67,7 +67,7 @@ pip install datalad-metalad-fairmeta
 pip install datalad-metalad-fairmeta[all]
 
 # From source
-git clone https://github.com/your-org/datalad-metalad-fairmeta
+git clone https://github.com/jonasmac16/datalad-metalad-fairmeta
 cd datalad-metalad-fairmeta
 pip install -e .
 ```

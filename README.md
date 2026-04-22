@@ -69,7 +69,7 @@ All extractors use standardized ontology terms:
 
 ## Documentation
 
-Full documentation is available at: [https://jonasmac16.github.io/datalad-metalad-fairmeta](https://your-org.github.io/datalad-metalad-fairmeta)
+Full documentation is available at: [https://jonasmac16.github.io/datalad-metalad-fairmeta](https://jonasmac16.github.io/datalad-metalad-fairmeta)
 
 ## License
 
