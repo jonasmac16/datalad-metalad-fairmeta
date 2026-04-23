@@ -28,7 +28,7 @@ These extractors operate on directories containing output from specific platform
 | `fairmeta_phenocycler` | Akoya PhenoCycler | `.qptiff`, `.tif` files |
 | `fairmeta_molecular_cartography` | Resolve Bioscience | `*_results.txt`, channel TIFFs |
 | `fairmeta_hyperion` | Fluidigm Hyperion | `*_001.tiff` channel files |
-| `fairmeta_manual` | Interactive | User-provided via prompts or config |
+| `fairmeta_manual` | Interactive | User-provided via prompts or [config files](../templates.md) |
 
 ## Common Parameters
 

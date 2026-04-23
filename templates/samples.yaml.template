@@ -1,0 +1,168 @@
+# =============================================================================
+# SAMPLE-LEVEL METADATA TEMPLATE
+# =============================================================================
+# Per-sample metadata. Multiple samples per file.
+# Each sample entry links to dataset via sample_id.
+#
+# USAGE:
+#   1. Copy to samples.yaml in your dataset directory
+#   2. Add one entry per sample in the samples list
+#   3. Can override dataset-level ontology terms per sample
+# 
+# For complete ontology examples, see docs/templates/ontology.md
+
+samples:
+  # =============================================================================
+  # EXAMPLE 1: Healthy Liver Sample
+  # Uncomment and modify for your data
+  # =============================================================================
+  # - sample_id: "sample_h001"  # REQUIRED: Unique sample identifier
+  #   donor_id: "donor_001"    # Link to donor
+  #   
+  #   # Per-sample ontology overrides (optional - defaults to dataset values):
+  #   organism_ontology_term_id:
+  #     id: "NCBITaxon:9606"
+  #     label: "Homo sapiens"
+  #   tissue_ontology_term_id:
+  #     id: "UBERON:0002114"
+  #     label: "liver"
+  #   cell_type_ontology_term_id:
+  #     id: "CL:0002304"
+  #     label: "hepatocyte"
+  #   disease_ontology_term_id:
+  #     id: "PATO:0000461"
+  #     label: "normal"
+  #   sex_ontology_term_id:
+  #     id: "PATO:0000384"
+  #     label: "male"
+  #   
+  #   # Collection metadata:
+  #   collection_date: "2024-01-15"  # Format: YYYY-MM-DD
+  #   collection_method: "surgical resection"
+  #   storage_conditions: "fresh frozen"
+  #   
+  #   # Custom sample fields:
+  #   custom_fields:
+  #     # pathology_notes: "Normal liver architecture, no focal lesions"
+  #     # liver_function_tests: "ALT: 25, AST: 30, bilirubin: 0.8 mg/dL"
+  #     # notes: "Adjacent to tumor sample_lm001"
+
+  # =============================================================================
+  # EXAMPLE 2: Colorectal Liver Metastasis
+  # =============================================================================
+  # - sample_id: "sample_lm001"  # CRC metastasis identifier
+  #   donor_id: "donor_002"
+  #   organism_ontology_term_id:
+  #     id: "NCBITaxon:9606"
+  #     label: "Homo sapiens"
+  #   tissue_ontology_term_id:
+  #     id: "UBERON:0002114"
+  #     label: "liver"
+  #   # Metastatic cancer cells from colon
+  #   cell_type_ontology_term_id:
+  #     id: "CL:0001000"  # malignant cell
+  #     label: "metastatic cancer cell"
+  #   disease_ontology_term_id:
+  #     id: "MONDO:0004992"
+  #     label: "colorectal carcinoma"
+  #   sex_ontology_term_id:
+  #     id: "PATO:0000383"
+  #     label: "female"
+  #   
+  #   collection_date: "2024-02-20"
+  #   collection_method: "surgical resection"
+  #   storage_conditions: "fresh frozen"
+  #   
+  #   # CRC-specific custom fields:
+  #   custom_fields:
+  #     primary_tumor_origin: "colon"
+  #     primary_tumor_stage: "T3N1M1"
+  #     metastasis_size_cm: 2.5
+  #     metastasis_location: "segment VII, right lobe"
+  #     kras_mutation: "positive"
+  #     microsatellite_status: "stable"
+  #     notes: "Multiple additional lesions <5mm not sampled"
+
+  # =============================================================================
+  # EXAMPLE 3: Primary Hepatocellular Carcinoma (HCC)
+  # =============================================================================
+  # - sample_id: "sample_hcc001"
+  #   donor_id: "donor_003"
+  #   organism_ontology_term_id:
+  #     id: "NCBITaxon:9606"
+  #     label: "Homo sapiens"
+  #   tissue_ontology_term_id:
+  #     id: "UBERON:0002114"
+  #     label: "liver"
+  #   cell_type_ontology_term_id:
+  #     id: "CL:0001003"
+  #     label: "hepatocellular carcinoma cell"
+  #   disease_ontology_term_id:
+  #     id: "MONDO:0002317"
+  #     label: "hepatocellular carcinoma"
+  #   sex_ontology_term_id:
+  #     id: "PATO:0000384"
+  #     label: "male"
+  #   
+  #   collection_date: "2024-03-10"
+  #   collection_method: "surgical resection"
+  #   storage_conditions: "fresh frozen"
+  #   
+  #   # HCC-specific custom fields:
+  #   custom_fields:
+  #     afp_level_ng_ml: 1250
+  #     liver_cirrhosis: "yes"
+  #     fibrosis_stage: "F3"
+  #     tumor_grade: " Edmondson-Steiner II"
+  #     vascular_invasion: "no"
+  #     notes: "Solitary lesion, 4cm diameter"
+
+  # =============================================================================
+  # EXAMPLE 4: Gallbladder Carcinoma
+  # =============================================================================
+  # - sample_id: "sample_gbc001"
+  #   donor_id: "donor_004"
+  #   tissue_ontology_term_id:
+  #     id: "UBERON:0002118"
+  #     label: "gallbladder"
+  #   cell_type_ontology_term_id:
+  #     id: "CL:0001002"  # adenocarcinoma cell
+  #     label: "gallbladder adenocarcinoma cell"
+  #   disease_ontology_term_id:
+  #     id: "MONDO:0002494"
+  #     label: "gallbladder carcinoma"
+  #   
+  #   collection_date: "2024-04-05"
+  #   collection_method: "cholecystectomy"
+  #   storage_conditions: "formalin fixed paraffin embedded"
+  #   
+  #   custom_fields:
+  #     tumor_stage: "T2N0M0"
+  #     histology_type: "adenocarcinoma"
+  #     notes: "Incidental finding during cholecystectomy"
+
+  # =============================================================================
+  # ADD YOUR SAMPLES BELOW
+  # Copy one of the examples above and modify for each sample
+  # =============================================================================
+  
+  # Example format:
+  # - sample_id: "sample_XXX"
+  #   donor_id: "donor_XXX"
+  #   organism_ontology_term_id:
+  #     id: "NCBITaxon:9606"
+  #     label: "Homo sapiens"
+  #   tissue_ontology_term_id:
+  #     id: "UBERON:0002114"
+  #     label: "liver"
+  #   cell_type_ontology_term_id:
+  #     id: "CL:0002304"
+  #     label: "hepatocyte"
+  #   disease_ontology_term_id:
+  #     id: "PATO:0000461"
+  #     label: "normal"
+  #   collection_date: "YYYY-MM-DD"
+  #   collection_method: "biopsy/surgical resection/autopsy"
+  #   storage_conditions: "fresh frozen/FFPE/formalin fixed"
+  #   custom_fields:
+  #     field_name: "value"

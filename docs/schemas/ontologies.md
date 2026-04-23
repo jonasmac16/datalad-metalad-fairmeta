@@ -14,10 +14,14 @@
 
 | ID | Label |
 |----|-------|
+| UBERON:0002114 | liver |
+| UBERON:0002118 | gallbladder |
 | UBERON:0002113 | kidney |
 | UBERON:0000955 | brain |
 | UBERON:0002048 | lung |
-| UBERON:0001255 | liver |
+| UBERON:0001255 | pancreas |
+
+> **Tip**: For more liver-specific ontology terms and template examples, see [Template Ontology Reference](../templates/ontology.md).
 
 ### Cell Type (CL)
 

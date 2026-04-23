@@ -79,6 +79,7 @@ pip install -e .
 - [Extractor Documentation](extractors/index.md)
 - [Metalad Integration](metalad/index.md)
 - [Schema Reference](schemas/index.md)
+- [Metadata Templates](templates.md)
 - [Edge Cases](edge_cases/index.md)
 - [Examples](examples/index.md)
 

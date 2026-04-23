@@ -134,5 +134,6 @@ datalad meta-conduct extract_metadata \
 - Learn about [all extractors](extractors/index.md)
 - Understand [Metalad integration](metalad/index.md)
 - Explore [schema validation](schemas/index.md)
+- Use [metadata templates](templates.md) for curated metadata
 - Check out [examples](examples/index.md)
 - Review [edge cases handling](edge_cases/index.md)

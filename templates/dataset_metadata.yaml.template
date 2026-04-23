@@ -1,0 +1,149 @@
+# =============================================================================
+# DATASET-LEVEL METADATA TEMPLATE
+# =============================================================================
+# This file captures metadata that cannot be automatically extracted from data files.
+#
+# Required fields marked with (*), recommended with (+)
+# 
+# USAGE:
+#   1. Copy this file to your dataset directory (rename to metadata.yaml)
+#   2. Fill in the fields, keeping the YAML format
+#   3. Use with manual extractor: datalad meta-extract -d . --force-dataset-level fairmeta_manual config metadata.yaml
+# 
+# Schema: https://datalad-metalad-fairmeta.github.io/schemas/manual.schema.json
+
+# (*) Schema reference - REQUIRED, do not change
+$schema: "https://datalad-metalad-fairmeta.github.io/schemas/manual.schema.json"
+
+# (*) Schema version - REQUIRED, do not change  
+schema_version: "1.0.0"
+
+# (*) Title - REQUIRED
+# Example: "Liver metastasis from colorectal cancer - patient Donor_042"
+title: "Enter dataset title here"
+
+# (+) Description - recommended
+# Example: "Spatial transcriptomics analysis of colorectal liver metastasis samples..."
+description: "Enter description of the experiment/dataset"
+
+# (+) Creators - recommended
+# Format: list of {name, orcid?, affiliation?, email?, role?}
+# Example:
+creators:
+  # - name: "Dr. Jane Smith"
+  #   orcid: "0000-0001-2345-6789"  # Optional: ORCID iD (format: 0000-0000-0000-0000)
+  #   affiliation: "University Medical Center"  # Optional
+  #   email: "jane.smith@example.org"  # Optional
+  #   role: "creator"  # Options: creator, contributor, principal_investigator
+
+# (+) Organism - recommended (required for h5ad schema)
+# Format: {id: "ONTOLOGY:ID", label: "Human Readable Label"}
+organism_ontology_term_id:
+  id: "NCBITaxon:9606"  # NCBITaxon:9606 = Homo sapiens (human)
+  label: "Homo sapiens"
+
+# (+) Tissue/Organ - recommended
+# Common liver samples - see templates/docs for complete list:
+#   - UBERON:0002114 = liver
+#   - UBERON:0002118 = gallbladder
+#   - UBERON:0001002 = liver parenchyma
+tissue_ontology_term_id:
+  id: "UBERON:0002114"
+  label: "liver"
+
+# (+) Assay/Technology - required for h5ad schema
+# Common spatial transcriptomics assays:
+#   - EFO:0009899 = 10x Genomics 3' v3
+#   - EFO:0010010 = 10x Genomics Visium
+#   - EFO:0002774 = imaging mass cytometry
+#   - EFO:0008681 = multiplexed error-robust fluorescence in situ hybridization (MERFISH)
+assay_ontology_term_id:
+  id: "EFO:0009899"
+  label: "10x Genomics 3' v3"
+
+# (+) Disease state - recommended for diseased samples
+# Liver disease examples:
+#   - PATO:0000461 = normal (healthy tissue)
+#   - MONDO:0004992 = colorectal carcinoma (CRC metastasis)
+#   - MONDO:0002317 = hepatocellular carcinoma (HCC)
+#   - MONDO:0002494 = gallbladder carcinoma
+#   - MONDO:0001627 = breast carcinoma (if primary breast cancer)
+disease_ontology_term_id:
+  id: "PATO:0000461"
+  label: "normal"
+
+# (+) Cell type - optional but recommended
+# Liver cell types:
+#   - CL:0002304 = hepatocyte
+#   - CL:0001003 = liver carcinoma cell
+#   - CL:0002138 = liver Kupffer cell (macrophage)
+#   - CL:0002139 = liver sinusoidal endothelial cell
+#   - CL:0001000 = malignant cell (general metastatic)
+cell_type_ontology_term_id:
+  id: "CL:0002304"
+  label: "hepatocyte"
+
+# (+) Development stage - optional
+# Examples:
+#   - HsapDv:0000003 = adult
+#   - HsapDv:0000198 = child
+#   - HsapDv:0000242 = elderly
+development_stage_ontology_term_id:
+  id: "HsapDv:0000003"
+  label: "adult"
+
+# (+) Sex - optional
+#   - PATO:0000384 = male
+#   - PATO:0000383 = female
+#   - PATO:0001341 = mixed sex (if pooled sample)
+sex_ontology_term_id:
+  # id: "PATO:0000384"
+  # label: "male"
+
+# (+) Self-reported ethnicity - optional (HANCESTRO ontology)
+# Examples:
+#   - HANCESTRO:0000014 = European
+#   - HANCESTRO:0000001 = African
+#   - HANCESTRO:0000005 = Asian
+#   - HANCESTRO:0019586 = unknown
+self_reported_ethnicity_ontology_term_id:
+  # id: "HANCESTRO:0000014"
+  # label: "European"
+
+# (+) Donor ID(s) - recommended for linking samples
+# Example: ["donor_001", "donor_002", "donor_003"]
+donor_id: []
+
+# (+) Sample ID(s) - link to samples.yaml entries
+# Example: ["sample_h001", "sample_lm001", "sample_hcc001"]
+sample_id: []
+
+# License for data reuse (default: CC BY 4.0)
+license: "CC BY 4.0"
+
+# Keywords for discoverability
+# Example: ["spatial transcriptomics", "liver", "colorectal metastasis", "10x"]
+keywords: []
+
+# Related identifiers (DOI, GEO, ArrayExpress, etc.)
+# Format: list of {type, value, relation?}
+# Example:
+# related_identifiers:
+#   - type: "doi"
+#     value: "10.1038/s41587-023-0123-4"
+#     relation: "cites"
+#   - type: "geo"
+#     value: "GSE123456"
+#     relation: "is_part_of"
+#   - type: "arrayexpress"
+#     value: "E-MTAB-12345"
+#     relation: "is_part_of"
+related_identifiers: []
+
+# Custom fields (any additional metadata specific to your study)
+# Example:
+# custom_fields:
+#   study_name: "Liver Metastasis Project 2024"
+#   approval_number: "IRB-2024-0123"
+#   funding: "NIH R01-CA123456"
+custom_fields: {}
