@@ -104,9 +104,9 @@ cat dataset_metadata.json | python -m json.tool | less
 # - disease_ontology_term_id
 ```
 
-## Step 7: Merge with Auto-Extracted Data (Optional)
+## Step 7: Merge with Auto-Extracted Data (Recommended)
 
-For complete metadata, combine auto-extracted + curated:
+For complete metadata, combine auto-extracted + curated using the CLI command:
 
 ```bash
 # Auto-extract from your data files
@@ -116,11 +116,11 @@ datalad meta-extract -d . fairmeta_h5ad data.h5ad > h5ad_auto.json
 datalad meta-extract -d . --force-dataset-level fairmeta_manual \
     config dataset_metadata.yaml > curated.json
 
-# Merge (curated overrides auto for overlapping fields)
-python merge_metadata.py h5ad_auto.json curated.json > complete_metadata.json
+# Merge with auto-commit (CLI command!)
+fairmeta-merge h5ad_auto.json curated.json -o complete_metadata.json
 ```
 
-See [Merging Guide](merging.md) for the merge script.
+See [Merging Guide](merging.md) for full documentation of the CLI command and options.
 
 ## Complete Example
 

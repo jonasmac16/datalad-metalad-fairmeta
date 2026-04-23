@@ -48,6 +48,9 @@ setup(
         ],
     },
     entry_points={
+        'console_scripts': [
+            'fairmeta-merge=datalad_metalad_fairextract.cli:merge',
+        ],
         'datalad.extensions': [
             'metalad-fairmeta=datalad_metalad_fairextract:command_suite',
         ],
