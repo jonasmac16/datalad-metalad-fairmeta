@@ -21,7 +21,7 @@
 | UBERON:0002048 | lung |
 | UBERON:0001255 | pancreas |
 
-> **Tip**: For more liver-specific ontology terms and template examples, see [Template Ontology Reference](../templates/ontology.md).
+> **Tip**: For more liver-specific ontology terms and template examples, see [Template Ontology Reference](../template_docs/ontology.md).
 
 ### Cell Type (CL)
 

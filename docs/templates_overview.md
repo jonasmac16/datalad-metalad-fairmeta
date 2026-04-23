@@ -39,15 +39,15 @@ The templates capture the manual fields that make your metadata truly FAIR-compl
 
 ### For Users
 
-- **[Quick Start](templates/quickstart.md)** - Step-by-step guide to using templates
-- **[Examples](templates/examples.md)** - Liver-specific examples for your samples
-- **[Merging Guide](templates/merging.md)** - Combine auto + curated metadata
+- **[Quick Start](template_docs/quickstart.md)** - Step-by-step guide to using templates
+- **[Examples](template_docs/examples.md)** - Liver-specific examples for your samples
+- **[Merging Guide](template_docs/merging.md)** - Combine auto + curated metadata
+- **[Ontology Reference](template_docs/ontology.md)** - Complete ontology term list
 
 ### For Developers
 
-- **[Ontology Reference](templates/ontology.md)** - Complete ontology term list
-- **[Schema Reference](../schemas/index.md)** - JSON schema definitions
-- **[Manual Extractor](../extractors/manual.md)** - Config file mode details
+- **[Schema Reference](schemas/index.md)** - JSON schema definitions
+- **[Manual Extractor](extractors/manual.md)** - Config file mode details
 
 ## Workflow Summary
 
@@ -61,7 +61,7 @@ The templates capture the manual fields that make your metadata truly FAIR-compl
 
 ## Related Documentation
 
-- [Manual Extractor](../extractors/manual.md) - Config file mode
-- [Schema Reference](../schemas/index.md) - All metadata schemas
-- [Ontology Reference](../schemas/ontologies.md) - Basic ontology terms
-- [Extractors Overview](../extractors/index.md) - All available extractors
+- [Manual Extractor](extractors/manual.md) - Config file mode
+- [Schema Reference](schemas/index.md) - All metadata schemas
+- [Ontology Reference](schemas/ontologies.md) - Basic ontology terms
+- [Extractors Overview](extractors/index.md) - All available extractors

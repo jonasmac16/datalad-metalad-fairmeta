@@ -444,6 +444,6 @@ samples:
 
 ## Next Steps
 
-- [Quick Start](templates/quickstart.md) - Start from scratch
-- [Merging Guide](templates/merging.md) - Combine with auto-extracted data
-- [Ontology Reference](templates/ontology.md) - All available terms
+- [Quick Start](quickstart.md) - Start from scratch
+- [Merging Guide](merging.md) - Combine with auto-extracted data
+- [Ontology Reference](ontology.md) - All available terms

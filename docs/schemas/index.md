@@ -89,4 +89,4 @@ All schemas include these common features:
 ## Next Steps
 
 - [Ontology Reference](ontologies.md)
-- [Metadata Templates](../templates.md) - For fields requiring manual entry
+- [Metadata Templates](../templates_overview.md) - For fields requiring manual entry

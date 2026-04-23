@@ -221,5 +221,5 @@ verify_ontology('mondo', '0004992')  # colorectal carcinoma
 ## Related Documentation
 
 - [Schema Reference](../schemas/index.md) - JSON schema definitions
-- [Base Schema](../schemas/base.schema.json) - Core types
-- [Examples](templates/examples.md) - Completed template examples
+- [Ontology Reference](../schemas/ontologies.md) - Basic ontology terms
+- [Examples](examples.md) - Completed template examples

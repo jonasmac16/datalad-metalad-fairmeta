@@ -120,7 +120,7 @@ datalad meta-extract -d . --force-dataset-level fairmeta_manual \
 python merge_metadata.py h5ad_auto.json curated.json > complete_metadata.json
 ```
 
-See [Merging Guide](templates/merging.md) for the merge script.
+See [Merging Guide](merging.md) for the merge script.
 
 ## Complete Example
 
@@ -151,6 +151,6 @@ print(json.dumps(result, indent=2))
 
 ## Next Steps
 
-- [Examples](templates/examples.md) - See liver-specific examples
-- [Ontology](templates/ontology.md) - Find the right ontology terms
-- [Merging](templates/merging.md) - Advanced merge strategies
+- [Examples](examples.md) - See liver-specific examples
+- [Ontology](ontology.md) - Find the right ontology terms
+- [Merging](merging.md) - Advanced merge strategies

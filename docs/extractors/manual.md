@@ -45,7 +45,7 @@ datalad meta-extract -d . --force-dataset-level fairmeta_manual \
   schema h5ad
 ```
 
-> **Tip**: Use the [metadata templates](../templates.md) for ready-made YAML files with liver-specific examples.
+> **Tip**: Use the [metadata templates](../templates_overview.md) for ready-made YAML files with liver-specific examples.
 
 Example `metadata.yaml`:
 

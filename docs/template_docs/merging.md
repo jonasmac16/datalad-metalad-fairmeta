@@ -324,6 +324,6 @@ jq -s '.[0] * .[1]' auto.json curated.json > merged.json
 
 ## Next Steps
 
-- [Quick Start](templates/quickstart.md) - Basic template usage
-- [Examples](templates/examples.md) - Liver-specific examples  
-- [Ontology Reference](templates/ontology.md) - Find correct ontology terms
+- [Quick Start](quickstart.md) - Basic template usage
+- [Examples](examples.md) - Liver-specific examples  
+- [Ontology Reference](ontology.md) - Find correct ontology terms

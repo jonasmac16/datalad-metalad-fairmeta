@@ -80,6 +80,12 @@ nav:
   - Schemas:
       - schemas/index.md
       - schemas/ontologies.md
+  - Metadata Templates:
+      - templates_overview.md
+      - template_docs/quickstart.md
+      - template_docs/examples.md
+      - template_docs/merging.md
+      - template_docs/ontology.md
   - Edge Cases:
       - edge_cases/index.md
       - edge_cases/missing_files.md
