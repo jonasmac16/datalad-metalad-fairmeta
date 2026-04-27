@@ -117,7 +117,13 @@ datalad meta-extract -d . --force-dataset-level fairmeta_manual \
     config dataset_metadata.yaml > curated.json
 
 # Merge with auto-commit (CLI command!)
+# Smart merge - preserves technical fields (cell_count, gene_count, etc.)
 fairmeta-merge h5ad_auto.json curated.json -o complete_metadata.json
+
+# Alternative options:
+# - Override specific fields from curated: --preserve-auto cell_count
+# - Curated overrides all: --preserve-auto none
+# - Multi-sample: fairmeta-merge auto.json samples.yaml -o results/
 ```
 
 See [Merging Guide](merging.md) for full documentation of the CLI command and options.

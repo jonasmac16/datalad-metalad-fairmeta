@@ -26,6 +26,7 @@ setup(
         "datalad-metalad>=0.4",
         "jsonschema>=4.0",
         "click>=8.0",
+        "pyyaml>=6.0",
     ],
     extras_require={
         'ome_tiff': ["ome-types>=0.4.0"],

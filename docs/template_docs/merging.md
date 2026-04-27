@@ -11,21 +11,63 @@ The easiest way to merge metadata is using the built-in CLI command:
 # Install the package to enable the command
 pip install -e .
 
-# Merge with auto-commit to git (recommended!)
+# Basic merge (smart preserve by default - recommended)
 fairmeta-merge auto.json curated.json -o merged.json
 
-# Merge with custom commit message
-fairmeta-merge auto.json curated.json -o merged.json -m "Added complete metadata"
+# Explicit smart preserve (preserves all technical fields from auto)
+fairmeta-merge auto.json curated.json -o merged.json --preserve-auto smart
 
-# Merge without saving (just write output file)
-fairmeta-merge auto.json curated.json -o merged.json --no-save
+# Preserve specific fields only
+fairmeta-merge auto.json curated.json -o merged.json \
+    --preserve-auto cell_count,gene_count
+
+# No smart preserve - curated overrides everything (old behavior)
+fairmeta-merge auto.json curated.json -o merged.json --preserve-auto none
+
+# Multi-sample merge (see Multi-Sample section below)
+fairmeta-merge auto.json samples.yaml -o results/
 ```
+
+## Understanding Smart Merge
+
+The CLI uses smart merging by default to preserve technical fields from auto-extracted 
+metadata while allowing curated fields to override for annotation fields.
+
+### What --preserve-auto Does
+
+| Value | Behavior |
+|-------|----------|
+| `smart` (default) | Preserve ~35 technical fields from auto (cell_count, gene_count, etc.) |
+| `none` | Curated overrides everything (old behavior) |
+| comma-separated | Preserve only the specified fields |
+
+### Technical Fields Preserved (Smart Mode)
+
+When `--preserve-auto smart` (default), these fields are preserved from auto-extracted metadata:
+
+**h5ad/AnnData:**
+- `cell_count`, `gene_count`, `obsm_keys`, `layers`, `default_embedding`, `batch`
+
+**Xenium:**
+- `transcript_count`, `transcript_columns`, `morphology_width`, `morphology_height`,
+  `morphology_channels`, `cells_detected`, `gene_count`, `transcripts_detected`
+
+**SpatialData:**
+- `spatialdata_version`, `element_types`, `element_counts`, `coordinate_systems`,
+  `images`, `labels`, `points`, `shapes`, `tables`
+
+**TIFF/OME-TIFF:**
+- `width`, `height`, `bits_per_sample`, `samples_per_pixel`, `pixel_type`,
+  `dimension_order`, `channel_count`, `rgb_channels`, `pixel_size`
+
+**FASTQ:**
+- `read_count`, `quality_scores`, `read_lengths`, `read_number`, `sequence_length`
 
 ### What It Does
 
 The CLI command automatically:
 1. Reads both auto-extracted and curated JSON files
-2. Merges them (curated fields override auto for overlaps)
+2. Merges them with smart field preservation
 3. Adds provenance tracking (`_field_sources`) showing which source each field came from
 4. Writes the output file
 5. Runs `datalad add` and `datalad save` (unless `--no-save` is specified)
@@ -38,11 +80,13 @@ The merged output includes a `_field_sources` field for provenance:
 {
   "$schema": "https://datalad-metalad-fairmeta.github.io/schemas/h5ad.schema.json",
   "cell_count": 5000,
+  "gene_count": 20000,
   "organism_ontology_term_id": {"id": "NCBITaxon:9606", "label": "Homo sapiens"},
   "disease_ontology_term_id": {"id": "MONDO:0004992", "label": "colorectal carcinoma"},
   "title": "My Study",
   "_field_sources": {
     "cell_count": "auto",
+    "gene_count": "auto",
     "organism_ontology_term_id": "curated",
     "disease_ontology_term_id": "curated",
     "title": "curated"
@@ -75,85 +119,96 @@ datalad meta-extract -d . --force-dataset-level fairmeta_manual \
 ### Step 2: Merge with CLI
 
 ```bash
-# Simple merge with auto-commit
+# Smart merge with auto-commit (recommended!)
 fairmeta-merge auto.json curated.json -o merged.json
 ```
 
 The merged file will be automatically added and committed to git.
 
-## Manual Merge (Alternative)
+## Multi-Sample Merge
 
-If you need more control, you can use Python directly:
+For datasets with multiple samples, use the samples.yaml format:
 
-```python
-import json
-
-def merge_metadata(auto_file, curated_file, output_file):
-    """Merge auto-extracted + curated metadata."""
-    with open(auto_file) as f:
-        auto = json.load(f)
-    with open(curated_file) as f:
-        curated = json.load(f)
-    
-    auto_meta = auto.get('metadata', {})
-    curated_meta = curated.get('metadata', {})
-    
-    # Merge: curated overrides auto for overlaps
-    merged = {**auto_meta, **curated_meta}
-    
-    # Add provenance tracking
-    merged['_field_sources'] = {
-        **{k: 'auto' for k in auto_meta},
-        **{k: 'curated' for k in curated_meta if k not in auto_meta}
-    }
-    
-    with open(output_file, 'w') as f:
-        json.dump(merged, f, indent=2)
-
-merge_metadata('auto.json', 'curated.json', 'merged.json')
+```bash
+# Multi-sample merge
+fairmeta-merge auto.json samples.yaml -o results/
 ```
 
-## Advanced Merge Strategies
+### Samples.yaml Format
 
-For special cases, here are additional strategies:
+```yaml
+samples:
+  - sample_id: "sample_001"
+    donor_id: "donor_001"
+    tissue_ontology_term_id:
+      id: "UBERON:0002114"
+      label: "liver"
+    disease_ontology_term_id:
+      id: "PATO:0000461"
+      label: "normal"
 
-### Strategy: Smart Field Selection
+  - sample_id: "sample_002"
+    donor_id: "donor_002"
+    tissue_ontology_term_id:
+      id: "UBERON:0002114"
+      label: "liver"
+    disease_ontology_term_id:
+      id: "MONDO:0004992"
+      label: "colorectal carcinoma"
+```
 
-Keep auto-extracted values for technical fields, use curated for annotations:
+### Output
 
-```python
-def smart_merge(auto_meta, curated_meta):
-    """Curated for annotations, auto for technical."""
-    
-    # Fields that should always come from curated
-    curated_fields = {
-        'title', 'description', 'organism_ontology_term_id',
-        'tissue_ontology_term_id', 'cell_type_ontology_term_id',
-        'disease_ontology_term_id', 'assay_ontology_term_id',
-        'creators', 'donor_id', 'sample_id', 'license'
-    }
-    
-    merged = {}
-    
-    # Add curated fields first
-    for field in curated_fields:
-        if field in curated_meta:
-            merged[field] = curated_meta[field]
-    
-    # Then add auto, preserving curated if present
-    for key, value in auto_meta.items():
-        if key not in merged:
-            merged[key] = value
-        elif key in curated_meta:
-            # Keep curated, but note the auto value exists
-            merged[key + '_auto'] = value
-    
-    return merged
+The CLI creates a directory with individual JSON files:
+
+```
+results/
+├── sample_001.json    # Auto base + sample_001 overrides
+├── sample_002.json    # Auto base + sample_002 overrides
+└── _merged_manifest.json  # Index of all samples
+```
+
+Each sample file contains the merged metadata for that sample.
+
+## Command Reference
+
+```
+fairmeta-merge AUTO_FILE [CURATED_FILE] -o OUTPUT [OPTIONS]
+
+Arguments:
+  AUTO_FILE          JSON file from auto-extractor (required)
+  CURATED_FILE       JSON/YAML file from templates (required for basic merge,
+                    use samples.yaml for multi-sample)
+
+Options:
+  -o, --output FILE          Output file or directory
+  --preserve-auto TEXT        smart=all technical (default), none=curated overrides,
+                             or comma-separated list (default: smart)
+  --add-provenance         Add field source tracking (default: True)
+  --no-provenance         Skip provenance tracking
+  --no-save             Skip datalad add/save
+  -m, --message TEXT    Commit message (default: "Merged auto-extracted 
+                             and curated metadata")
+
+Examples:
+  # Basic smart merge
+  fairmeta-merge auto.json curated.json -o merged.json
+
+  # Preserve specific fields
+  fairmeta-merge auto.json curated.json -o merged.json \
+      --preserve-auto cell_count,gene_count
+
+  # No smart preserve (old behavior)
+  fairmeta-merge auto.json curated.json -o merged.json --preserve-auto none
+
+  # Multi-sample
+  fairmeta-merge auto.json samples.yaml -o results/
+
+  # Without auto-commit
+  fairmeta-merge auto.json curated.json -o merged.json --no-save
 ```
 
 ## Validation
-
-### CLI Validation
 
 After merging, verify the required fields are present:
 
@@ -173,35 +228,13 @@ else:
 "
 ```
 
-### Common Issues
+## Common Issues
 
 | Issue | Solution |
 |-------|----------|
 | Missing ontology terms | Check template fields are filled |
 | Empty cell_count | Auto-extraction may have failed |
 | Schema mismatch | Ensure schema URLs match |
-
-## Alternatives: Using jq
-
-For simple merges without Python:
-
-```bash
-# jq merge (curated wins)
-jq -s '.[0] * .[1]' auto.json curated.json > merged.json
-```
-
-## Command Reference
-
-```
-fairmeta-merge AUTO_FILE CURATED_FILE -o OUTPUT [OPTIONS]
-
-Options:
-  -o, --output FILE          Output file (default: stdout)
-  --add-provenance         Add field source tracking (default: True)
-  --no-provenance         Skip provenance tracking
-  --no-save             Skip datalad add/save
-  -m, --message TEXT    Commit message (default: "Merged auto-extracted and curated metadata")
-```
 
 ## Next Steps
 
